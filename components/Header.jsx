@@ -1,64 +1,55 @@
-import { useState } from "react";
+import { useRouter } from "next/router";
+
 import Link from "next/link";
 
-export default function Header() {
-    const [query, setQuery] = useState('');
+function isHome(path) {
+  return path === '/';
+}
 
-    return (
-        <header className="container">
-            <nav className="navbar" role="navigation" aria-label="main navigation">
-                <div className="navbar-brand">
-                    <Link href={'/'}>
-                        <a className="navbar-item">
-                            Next Shows
-                        </a>
-                    </Link>
-                    
-                     {query}
-                </div>
+export default function Header({ query, setQuery }) {
+  const router = useRouter();
 
-                <div id="navbarBasicExample" className="navbar-menu">
-                    <div className="navbar-start">
-                        <a className="navbar-item">
-                            Home
-                        </a>
+  function submit(e) {
+    e.preventDefault();
 
-                        <a className="navbar-item">
-                            Documentation
-                        </a>
+    const formData = new FormData(e.target);
+    const newQuery = formData.get('query');
 
-                        <div className="navbar-item has-dropdown is-hoverable">
-                            <a className="navbar-link">
-                                More
-                            </a>
+    if (newQuery === query) return;
 
-                            <div className="navbar-dropdown">
-                                <a className="navbar-item">
-                                    About
-                                </a>
-                                <a className="navbar-item">
-                                    Jobs
-                                </a>
-                                <a className="navbar-item">
-                                    Contact
-                                </a>
-                                <hr className="navbar-divider" />
-                                <a className="navbar-item">
-                                    Report an issue
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+    if (!isHome(router.pathname)) {
+      router.push('/');
+    }
 
-                    <div className="navbar-end">
-                        <div className="navbar-item">
-                            <div className="control">
-                                <input className="input" value={query} onInput={(e) => setQuery(e.target.value)} type="search" name="query" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-        </header>
-    )
+    setQuery(newQuery ?? '');
+  }
+
+  return (
+    <header>
+      <nav className="navbar py-2" role="navigation" aria-label="main navigation">
+        <div className="container">
+          <div className="navbar-brand">
+            <Link href={'/'}>
+              <a className="navbar-item">
+                Next Shows
+              </a>
+            </Link>
+          </div>
+
+          <form onSubmit={submit} className="is-flex is-align-content-stretch is-flex-grow-1 is-flex-shrink-0">
+            <div className="field has-addons ml-auto">
+              <div className="control">
+                <input placeholder="Search" autoComplete="off" className="input" type="search" name="query" />
+              </div>
+              <div className="control">
+                <button className="button is-primary" type="submit">
+                  Search
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </nav>
+    </header>
+  )
 }

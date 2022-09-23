@@ -2,3 +2,8 @@
 
 // Import only what you need from Bulma
 @import "../node_modules/bulma/bulma.sass";
+
+.container {
+  padding-left: $gap;
+  padding-right: $gap;
+}

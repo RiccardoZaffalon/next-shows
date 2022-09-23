@@ -1,0 +1,26 @@
+{
+  "short_name": "Next Shows",
+  "name": "Next Shows: Spoiler free episodes information",
+  "icons": [
+    {
+      "src": "/images/icons-vector.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    },
+    {
+      "src": "/images/icons-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/icons-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "display": "standalone",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "theme_color": "#3367D6",
+  "description": "Spoiler free episodes information"
+}

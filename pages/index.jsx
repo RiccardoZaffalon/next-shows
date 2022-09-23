@@ -8,7 +8,7 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 export default function Home({ api_key }) {
   // const url = `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&language=en-US&page=1&query=dragon&include_adult=false`;
   const url = "/api/mock/search";
-  const image_base = "https://image.tmdb.org/t/p/w185";
+  const image_base = "https://image.tmdb.org/t/p/w342";
   const { data, error } = useSWR(url, fetcher);
 
   if (error) return <div>failed to load</div>;
@@ -23,21 +23,29 @@ export default function Home({ api_key }) {
       </Head>
 
       <main>
-        {data.results.map((show, i) => {
-          return (
-            <Link key={i} href={`/show/${show.id}`}>
-              <a>
-                <Image
-                  src={image_base + show.poster_path}
-                  alt={show.name}
-                  width={185}
-                  height={278}
-                />
-                {show.name}
-              </a>
-            </Link>
-          );
-        })}
+        <div className="container">
+          <div className="columns is-multiline">
+            {data.results.map((show, i) => {
+              return (
+                show.poster_path ?
+                  <div className="column is-one-quarter">
+                    <Link key={i} href={`/show/${show.id}`}>
+                      <a className="is-block">
+                        <Image
+                          src={image_base + show.poster_path}
+                          alt={show.name}
+                          width={185 * 2}
+                          height={278 * 2}
+                        />
+                        <p>{show.name}</p>
+                      </a>
+                    </Link>
+                  </div> :
+                  null
+              );
+            })}
+          </div>
+        </div>
       </main>
     </>
   );

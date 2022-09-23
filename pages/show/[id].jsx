@@ -1,17 +1,13 @@
 import axios from "axios";
-import Link from "next/link";
 
 export default function Show({ show }) {
   const image_base = "https://image.tmdb.org/t/p/w500";
 
   return (
-    <>
-      <Link href="/">
-        <a>Home</a>
-      </Link>
+    <article className="container">
       <img src={image_base + show.backdrop_path} alt={show.name} />
       <h1>{show.name}</h1>
-    </>
+    </article>
   );
 }
 

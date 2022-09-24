@@ -11,8 +11,13 @@ export default function Show({ show }) {
         <title>Next Shows: {show.name}</title>
       </Head>
 
-      <article className="container">
-        <Image src={image_base + show.backdrop_path} alt={show.name} width={500} height={281} />
+      <article className="container mx-auto px-4">
+        <Image
+          src={image_base + show.backdrop_path}
+          alt={show.name}
+          width={500}
+          height={281}
+        />
         <h1>{show.name}</h1>
 
         <h2>{show.networks[0]?.name}</h2>

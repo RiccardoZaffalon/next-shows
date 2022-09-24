@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 function isHome(path) {
-  return path === '/';
+  return path === "/";
 }
 
 export default function Header({ query, setQuery }) {
@@ -13,43 +13,40 @@ export default function Header({ query, setQuery }) {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const newQuery = formData.get('query');
+    const newQuery = formData.get("query");
 
     if (newQuery === query) return;
 
     if (!isHome(router.pathname)) {
-      router.push('/');
+      router.push("/");
     }
 
-    setQuery(newQuery ?? '');
+    setQuery(newQuery ?? "");
   }
 
   return (
-    <header>
-      <nav className="navbar py-2" role="navigation" aria-label="main navigation">
-        <div className="container">
-          <div className="navbar-brand">
-            <Link href={'/'}>
-              <a className="navbar-item">
-                Next Shows
-              </a>
-            </Link>
-          </div>
+    <header className="py-4">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center">
+          <Link href={"/"}>
+            <a>Next Shows</a>
+          </Link>
 
-          <form onSubmit={submit} className="is-flex is-align-content-stretch is-flex-grow-1 is-flex-shrink-0">
-            <div className="field has-addons ml-auto">
-              <div className="control">
-                <input placeholder="Search" autoComplete="off" className="input" type="search" name="query" />
-              </div>
-              <div className="control">
-                <button className="button is-primary" type="submit">
-                  Search
-                </button>
-              </div>
-            </div>
+          <form onSubmit={submit} className="ml-auto">
+            <input
+              placeholder="Search"
+              autoComplete="off"
+              type="search"
+              name="query"
+            />
+            <input
+              className="rounded-tr rounded-br bg-blue-500 px-4 py-2 border border-blue-600 text-white font-medium"
+              type="submit"
+              value="Search"
+            />
           </form>
         </div>
-      </nav>
+      </div>
     </header>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -6,9 +6,9 @@ const image_base = "https://image.tmdb.org/t/p/w342";
 
 export default function Result({ show }) {
   return (
-    <div className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
+    <div className="w-full">
       <Link href={`/show/${show.id}`}>
-        <a className="is-block">
+        <a className="d-block">
           <Image
             src={image_base + show.poster_path}
             alt={show.name}
@@ -19,5 +19,5 @@ export default function Result({ show }) {
         </a>
       </Link>
     </div>
-  )
+  );
 }

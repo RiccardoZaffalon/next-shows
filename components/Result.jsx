@@ -10,6 +10,7 @@ export default function Result({ show }) {
       <Link href={`/show/${show.id}`}>
         <a className="d-block">
           <Image
+            className="rounded-lg"
             src={image_base + show.poster_path}
             alt={show.name}
             width={185 * 2}

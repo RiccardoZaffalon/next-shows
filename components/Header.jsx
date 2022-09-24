@@ -38,9 +38,10 @@ export default function Header({ query, setQuery }) {
               autoComplete="off"
               type="search"
               name="query"
+              className="bg-zinc-800"
             />
             <input
-              className="rounded-tr rounded-br bg-blue-500 px-4 py-2 border border-blue-600 text-white font-medium"
+              className="-m-[1px] rounded-tr rounded-br bg-blue-500 px-4 py-2 border border-blue-600 text-white font-medium cursor-pointer"
               type="submit"
               value="Search"
             />

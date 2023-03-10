@@ -1,51 +1,26 @@
-import { useRouter } from "next/router";
-
 import Link from "next/link";
-
-function isHome(path) {
-  return path === "/";
-}
+import Image from "next/image";
+import Search from "./Search";
 
 export default function Header({ query, setQuery }) {
-  const router = useRouter();
-
-  function submit(e) {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const newQuery = formData.get("query");
-
-    if (newQuery === query) return;
-
-    if (!isHome(router.pathname)) {
-      router.push("/");
-    }
-
-    setQuery(newQuery ?? "");
-  }
-
   return (
-    <header className="py-4">
+    <header className="py-4 md:py-6">
       <div className="container mx-auto px-4">
-        <div className="flex items-center">
+        <div className="lg:flex items-center">
           <Link href={"/"}>
-            <a>Next Shows</a>
+            <a>
+              <span className="sr-only">Next Shows</span>
+              <Image
+                src="/next-shows.svg"
+                alt="Next Shows"
+                width={48}
+                height={32} />
+            </a>
           </Link>
 
-          <form onSubmit={submit} className="ml-auto">
-            <input
-              placeholder="Search"
-              autoComplete="off"
-              type="search"
-              name="query"
-              className="bg-zinc-800"
-            />
-            <input
-              className="-m-[1px] rounded-tr rounded-br bg-blue-500 px-4 py-2 border border-blue-600 text-white font-medium cursor-pointer"
-              type="submit"
-              value="Search"
-            />
-          </form>
+          {
+            query ? <Search query={query} setQuery={setQuery} /> : null
+          }
         </div>
       </div>
     </header>

@@ -2,6 +2,7 @@ import useSWR from "swr";
 import Head from "next/head";
 import Result from "../components/Result";
 import Spinner from "../components/Spinner";
+import Welcome from "../components/Welcome";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -19,7 +20,7 @@ function Results({ error, data }) {
   );
 }
 
-export default function Home({ query, api_key }) {
+export default function Home({ query, setQuery, api_key }) {
   const url =
     query && api_key
       ? `https://api.themoviedb.org/3/search/tv?api_key=${api_key}&language=en-US&page=1&query=${query}&include_adult=false`
@@ -33,9 +34,13 @@ export default function Home({ query, api_key }) {
       </Head>
 
       <main>
-        <div className="container mx-auto px-4">
-          <Results data={data} error={error} />
-        </div>
+        {
+          query ?
+            <div className="container mx-auto px-4">
+              <Results data={data} error={error} />
+            </div> :
+            <Welcome query={query} setQuery={setQuery} />
+        }
       </main>
     </>
   );
